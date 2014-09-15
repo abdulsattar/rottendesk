@@ -16,11 +16,18 @@ module Freshdesk
       @client ||= RestClient::Resource.new("http#{ssl ? '' : 's'}://#{username}:#{password}@#{url}")
     end
 
-    def User
-      @user ||= begin
-                  User.app = self
-                  User
-                end
+
+    models = [User, Ticket]
+
+    models.each do |m|
+      class_eval %Q<
+        def #{m.short_name}
+          @#{m.short_name.downcase} ||= begin
+                                          #{m}.app = self
+                                          #{m}
+                                        end
+        end
+      >
     end
   end
 end

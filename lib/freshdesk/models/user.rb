@@ -1,6 +1,9 @@
 module Freshdesk
   class User < Model
 
+    endpoint "contacts"
+    json_key "user"
+
     field :id
     field :name
     field :email
@@ -18,7 +21,5 @@ module Freshdesk
     field :helpdesk_agent
     field :active
 
-    endpoint "contacts"
-    json_key "user"
   end
 end
