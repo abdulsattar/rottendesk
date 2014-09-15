@@ -28,7 +28,7 @@ freskdesk.User.find(<user_id>)
   @address="1 Winterfell"
   ...
 
-freshdesk.search(options)
+freshdesk.User.search(options)
 => [#<Freshdesk::User:0x007f1d9935d438
   @active=true,
   @name = "Eddard Stark"
