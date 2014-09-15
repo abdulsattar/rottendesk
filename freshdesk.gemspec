@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'freshdesk/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "freshdesk"
+  spec.name          = "freshdesk-api"
   spec.version       = Freshdesk::VERSION
   spec.authors       = ["Abdulsattar Mohammed"]
   spec.email         = ["asattar.md@gmail.com"]
