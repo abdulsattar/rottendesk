@@ -36,13 +36,13 @@ freshdesk.search(options)
   ...,
   #<Freshdesk::User:0x007f1d9935d438
   @active=true,
-  @name = "Eddard Stark"
-  @address="1 Winterfell"]
+  @name = "Bran Stark"
+  @address="2 Tree"]
 ```
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/freshdesk/fork )
+1. Fork it ( https://github.com/abdulsattar/freshdesk/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
