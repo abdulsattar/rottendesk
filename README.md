@@ -1,12 +1,12 @@
 # Freshdesk
 
-TODO: Write a gem description
+Ruby client for [Freshdesk](https://freshdesk.com) that uses the [JSON API](http://freshdesk.com/api) of Freshdesk.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'freshdesk'
+    gem 'freshdesk-api'
 
 And then execute:
 
@@ -14,11 +14,31 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install freshdesk
+    $ gem install freshdesk-api
 
 ## Usage
 
-TODO: Write usage instructions here
+``` ruby
+freshdesk = Freshdesk::App.new('domain.freshdesk.com', 'username/key', 'password')
+
+freskdesk.User.find(<user_id>)
+=> #<Freshdesk::User:0x007f1d9935d438
+  @active=true,
+  @name = "Eddard Stark"
+  @address="1 Winterfell"
+  ...
+
+freshdesk.search(options)
+=> [#<Freshdesk::User:0x007f1d9935d438
+  @active=true,
+  @name = "Eddard Stark"
+  @address="1 Winterfell"
+  ...,
+  #<Freshdesk::User:0x007f1d9935d438
+  @active=true,
+  @name = "Eddard Stark"
+  @address="1 Winterfell"]
+```
 
 ## Contributing
 
