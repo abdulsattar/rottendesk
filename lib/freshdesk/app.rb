@@ -8,12 +8,12 @@ module Freshdesk
       @url = url
       @username = username
       @password = password
-      @ssl = true
+      @ssl = ssl
     end
 
     def client
       RestClient.log = Logger.new($stdout)
-      @resource ||= RestClient::Resource.new("http#{ssl ? '' : 's'}://#{username}:#{password}@#{url}")
+      @client ||= RestClient::Resource.new("http#{ssl ? '' : 's'}://#{username}:#{password}@#{url}")
     end
 
     def User
