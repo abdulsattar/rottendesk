@@ -4,7 +4,8 @@ module Freshdesk
     endpoint "contacts"
     json_key "user"
 
-    field :id
+    field :id, readonly: true
+
     field :name
     field :email
     field :address

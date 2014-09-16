@@ -4,6 +4,8 @@ module Freshdesk
     endpoint "helpdesk/tickets"
     json_key "helpdesk_ticket"
 
+    field :id, readonly: true
+
     field :display_id
     field :email
     field :requester_id
@@ -22,7 +24,6 @@ module Freshdesk
     field :email_config_id
     field :isescalated
     field :due_by
-    field :id
     field :attachments
 
   end

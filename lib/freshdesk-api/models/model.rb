@@ -95,11 +95,12 @@ module Freshdesk
         end
       end
 
-      def field(field)
+      def field(field, options = {})
         @_fields ||= []
         @_fields << field
 
-        attr_accessor field
+        attr_reader field
+        attr_writer field unless options[:readonly]
       end
 
       def fields
