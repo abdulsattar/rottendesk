@@ -21,5 +21,14 @@ module Freshdesk
     field :helpdesk_agent
     field :active
 
+    class << self
+      def search(filters = {})
+        filters[:query] = "phone is #{filters.delete(:phone)}" if filters[:phone]
+        filters[:query] = "mobile is #{filters.delete(:mobile)}" if filters[:mobile]
+        filters[:query] = "email is #{filters.delete(:email)}" if filters[:email]
+        super(filters)
+      end
+    end
+
   end
 end
