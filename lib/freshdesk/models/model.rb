@@ -28,7 +28,7 @@ module Freshdesk
       def parse_resource(resource)
         model = self.new
 
-        resource ||= resource[@json_key]
+        resource = resource[@json_key] if resource[@json_key]
 
         @_fields.each do |f|
           model.send("#{f}=", resource[f.to_s]) if model.respond_to? "#{f}="
