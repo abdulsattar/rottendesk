@@ -6,7 +6,7 @@ module Freshdesk
 
     field :id, readonly: true
 
-    field :display_id
+    field :display_id, readonly: true
     field :email
     field :requester_id
     field :subject
@@ -24,7 +24,6 @@ module Freshdesk
     field :email_config_id
     field :isescalated
     field :due_by
-    field :attachments
-
+    field :attachments, readonly: true
   end
 end

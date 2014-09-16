@@ -19,8 +19,8 @@ module Freshdesk
     field :time_zone
     field :customer_id
     field :deleted
-    field :helpdesk_agent
-    field :active
+    field :helpdesk_agent, readonly: true
+    field :active, readonly: true
 
     class << self
       def where(filters = {})
