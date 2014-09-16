@@ -81,7 +81,7 @@ module Freshdesk
         parse(app.client["#{@endpoint}/#{id}.json"].get)
       end
 
-      def search(filters = {})
+      def where(filters = {})
         parse(app.client["#{@endpoint}.json"].get params: filters)
       end
 

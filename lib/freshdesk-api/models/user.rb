@@ -22,7 +22,7 @@ module Freshdesk
     field :active
 
     class << self
-      def search(filters = {})
+      def where(filters = {})
         filters[:query] = "phone is #{filters.delete(:phone)}" if filters[:phone]
         filters[:query] = "mobile is #{filters.delete(:mobile)}" if filters[:mobile]
         filters[:query] = "email is #{filters.delete(:email)}" if filters[:email]
