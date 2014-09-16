@@ -3,9 +3,79 @@ require 'json'
 
 module Freshdesk
   class Model
+
+    def initialize(attrs = {})
+      attrs.each do |k,v|
+        self.send("#{k}=", v) if respond_to? "#{k}="
+      end
+    end
+
+    def persisted?
+      !self.id.nil?
+    end
+
+    def save
+      persisted? ? update : create_new
+    end
+
+    def update
+    end
+
+    def to_h
+      fields.reduce({}){|h, f| h[f] = self.send(f); h}.compact
+    end
+
+    def errors
+      @errors
+    end
+
+    def valid?
+      errors.nil? || errors.empty?
+    end
+
+    def from_json(json)
+      json = JSON.parse(json) if json.is_a? String
+      json = json[json_key] if json[json_key]
+      fields.each do |f|
+        self.instance_variable_set("@#{f}", json[f.to_s])
+      end
+      self
+    end
+
+    def fields
+      self.class.fields
+    end
+
+    protected
+    def create_new
+      json = {json_key => to_h}.to_json
+      response = client["#{endpoint}.json"].post json, content_type: :json, accept: :json
+      self.from_json response
+    rescue RestClient::UnprocessableEntity => ex
+      @errors = Hash[JSON.parse(ex.response)]
+      nil
+    end
+
+    def endpoint
+      self.class.get_endpoint
+    end
+
+    def json_key
+      self.class.get_json_key
+    end
+
+    def client
+      self.class.app.client
+    end
+
     class << self
 
       attr_accessor :app
+
+      def create(attrs = {})
+        model = self.new(attrs)
+        model.save
+      end
 
       def find(id)
         parse(app.client["#{@endpoint}/#{id}.json"].get)
@@ -19,21 +89,10 @@ module Freshdesk
         remote_fields = JSON.parse(json)
 
         if remote_fields.is_a? Array
-          remote_fields.map{|f| parse_resource(f)}
+          remote_fields.map{|f| self.new.from_json(f)}
         else
-          parse_resource(remote_fields)
+          self.new.from_json(remote_fields)
         end
-      end
-
-      def parse_resource(resource)
-        model = self.new
-
-        resource = resource[@json_key] if resource[@json_key]
-
-        @_fields.each do |f|
-          model.send("#{f}=", resource[f.to_s]) if model.respond_to? "#{f}="
-        end
-        model
       end
 
       def field(field)
@@ -41,6 +100,10 @@ module Freshdesk
         @_fields << field
 
         attr_accessor field
+      end
+
+      def fields
+        @_fields
       end
 
       def endpoint(endpoint)
@@ -51,6 +114,13 @@ module Freshdesk
         @json_key = key
       end
 
+      def get_endpoint
+        @endpoint
+      end
+
+      def get_json_key
+        @json_key
+      end
     end
   end
 end
