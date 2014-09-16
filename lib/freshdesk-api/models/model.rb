@@ -53,7 +53,7 @@ module Freshdesk
       self.from_json response
     rescue RestClient::UnprocessableEntity => ex
       @errors = Hash[JSON.parse(ex.response)]
-      nil
+      self
     end
 
     def endpoint
