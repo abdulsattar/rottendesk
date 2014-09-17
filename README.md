@@ -2,6 +2,8 @@
 
 Ruby client for [Freshdesk](https://freshdesk.com) that uses the [JSON API](http://freshdesk.com/api) of Freshdesk.
 
+[![Code Climate](https://codeclimate.com/github/abdulsattar/rottendesk/badges/gpa.svg)](https://codeclimate.com/github/abdulsattar/rottendesk)
+
 ## Installation
 
 Add this line to your application's Gemfile:
