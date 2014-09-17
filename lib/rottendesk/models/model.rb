@@ -49,7 +49,7 @@ module Rottendesk
     protected
     def create_new
       json = {json_key => to_h}.to_json
-      response = client["#{endpoint}.json"].post json, content_type: :json, accept: :json
+      response = client.post(endpoint, json)
       self.from_json response
     rescue RestClient::UnprocessableEntity => ex
       @errors = Hash[JSON.parse(ex.response)]
@@ -78,11 +78,11 @@ module Rottendesk
       end
 
       def find(id)
-        parse(app.client["#{@endpoint}/#{id}.json"].get)
+        parse(app.client.get("#{@endpoint}/#{id}"))
       end
 
       def where(filters = {})
-        parse(app.client["#{@endpoint}.json"].get params: filters)
+        parse(app.client.get(@endpoint, params: filters))
       end
 
       def parse(json)

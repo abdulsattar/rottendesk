@@ -12,8 +12,7 @@ module Rottendesk
     end
 
     def client
-      RestClient.log = Logger.new($stdout)
-      @client ||= RestClient::Resource.new("http#{ssl ? '' : 's'}://#{username}:#{password}@#{url}")
+      @client ||= Client.new("http#{ssl ? '' : 's'}://#{username}:#{password}@#{url}")
     end
 
 
