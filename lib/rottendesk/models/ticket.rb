@@ -25,5 +25,11 @@ module Rottendesk
     field :isescalated
     field :due_by
     field :attachments, readonly: true
+
+    class << self
+      def filter(filter_name)
+        parse(app.client.get("#{get_endpoint}/filter/#{filter_name}", params: {format: :json}, append_json: false))
+      end
+    end
   end
 end

@@ -25,14 +25,17 @@ module Rottendesk
       defaults = {
         method: :get,
         content_type: :json,
-        accept: :json
+        accept: :json,
+        append_json: true
       }
       options = defaults.merge(options)
 
-      Rottendesk.logger.info "Rottendesk: #{options[:method].upcase} /#{url}.json with #{options.except(:method)}"
+      url += '.json' if options[:append_json]
+
+      Rottendesk.logger.info "Rottendesk: #{options[:method].upcase} /#{url} with #{options.except(:method)}"
 
       args = [options[:method], options[:body], options.except(:method, :body)].compact
-      response = @rest_client[url + '.json'].send(*args)
+      response = @rest_client[url].send(*args)
 
       Rottendesk.logger.info "Rottendesk: #{response.code}"
 
