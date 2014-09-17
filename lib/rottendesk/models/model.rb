@@ -18,6 +18,7 @@ module Rottendesk
 
     def save
       persisted? ? update : create_new
+      changes_applied
     end
 
     def update
