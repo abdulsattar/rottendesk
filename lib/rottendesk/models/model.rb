@@ -19,14 +19,6 @@ module Rottendesk
     def save
       persisted? ? update : create_new
       changes_applied
-    end
-
-    def update
-      json = {json_key => to_h.only(*changed_fields.keys)}.to_json
-      client.put("#{endpoint}/#{id}", json)
-      self
-    rescue RestClient::UnprocessableEntity => ex
-      @errors = Hash[JSON.parse(ex.response)]
       self
     end
 
@@ -56,13 +48,20 @@ module Rottendesk
     end
 
     protected
+
+    def update
+      json = {json_key => to_h.only(*changed_fields.keys)}.to_json
+      client.put("#{endpoint}/#{id}", json)
+    rescue RestClient::UnprocessableEntity => ex
+      @errors = Hash[JSON.parse(ex.response)]
+    end
+
     def create_new
       json = {json_key => to_h}.to_json
       response = client.post(endpoint, json)
       self.from_json response
     rescue RestClient::UnprocessableEntity => ex
       @errors = Hash[JSON.parse(ex.response)]
-      self
     end
 
     def endpoint
