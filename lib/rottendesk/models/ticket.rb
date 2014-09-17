@@ -28,15 +28,20 @@ module Rottendesk
 
     class << self
       def filter(filter_name)
-        parse(app.client.get("#{get_endpoint}/filter/#{filter_name}", params: {format: :json}, append_json: false))
+        default_filters("filter/#{filter_name}")
       end
 
       def requester(requester_id)
-        parse(app.client.get("#{get_endpoint}/filter/requester/#{requester_id}", params: {format: :json}, append_json: false))
+        default_filters("filter/requester/#{requester_id}")
       end
 
       def view(view_id)
-        parse(app.client.get("#{get_endpoint}/view/#{view_id}", params: {format: :json}, append_json: false))
+        default_filters("view/#{view_id}")
+      end
+
+      private
+      def default_filters(url)
+        parse(app.client.get("#{get_endpoint}/#{url}", params: {format: :json}, append_json: false))
       end
     end
   end
