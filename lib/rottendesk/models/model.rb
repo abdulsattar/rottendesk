@@ -4,6 +4,8 @@ require 'json'
 module Rottendesk
   class Model
 
+    include Rottendesk::Dirty
+
     def initialize(attrs = {})
       attrs.each do |k,v|
         self.send("#{k}=", v) if respond_to? "#{k}="
@@ -99,8 +101,7 @@ module Rottendesk
         @_fields ||= []
         @_fields << field
 
-        attr_reader field
-        attr_writer field unless options[:readonly]
+        field_accessor field, options
       end
 
       def fields
