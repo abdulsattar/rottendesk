@@ -13,4 +13,13 @@ class Hash
     keys.each { |key| delete(key) }
     self
   end
+
+  def only!(*ks)
+    except!(*(keys - ks))
+  end
+
+  def only(*ks)
+    dup.only!(*ks)
+  end
+
 end

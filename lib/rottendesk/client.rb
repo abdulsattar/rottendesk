@@ -13,8 +13,8 @@ module Rottendesk
       request(url, options.merge(method: :post, body: body))
     end
 
-    def patch(url, body, options = {})
-      request(url, options.merge(method: :patch, body: body))
+    def put(url, body, options = {})
+      request(url, options.merge(method: :put, body: body))
     end
 
     def delete(url, options = {})

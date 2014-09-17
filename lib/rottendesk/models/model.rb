@@ -22,6 +22,11 @@ module Rottendesk
     end
 
     def update
+      json = {json_key => to_h.only(*changed_fields.keys)}.to_json
+      client.put("#{endpoint}/#{id}", json)
+    rescue RestClient::UnprocessableEntity => ex
+      @errors = Hash[JSON.parse(ex.response)]
+      self
     end
 
     def to_h
