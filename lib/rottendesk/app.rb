@@ -1,6 +1,6 @@
 require 'logger'
 
-module Freshdesk
+module Rottendesk
   class App
     attr_accessor :url, :username, :password, :ssl
 

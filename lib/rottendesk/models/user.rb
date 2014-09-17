@@ -1,4 +1,4 @@
-module Freshdesk
+module Rottendesk
   class User < Model
 
     endpoint "contacts"

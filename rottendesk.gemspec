@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'freshdesk-api/version'
+require 'rottendesk/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "freshdesk-api"
-  spec.version       = Freshdesk::VERSION
+  spec.name          = "rottendesk"
+  spec.version       = Rottendesk::VERSION
   spec.authors       = ["Abdulsattar Mohammed"]
   spec.email         = ["asattar.md@gmail.com"]
   spec.summary       = %q{Ruby client for Freshdesk}

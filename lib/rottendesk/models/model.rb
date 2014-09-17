@@ -1,7 +1,7 @@
 require 'rest_client'
 require 'json'
 
-module Freshdesk
+module Rottendesk
   class Model
 
     def initialize(attrs = {})

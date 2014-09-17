@@ -1,4 +1,4 @@
-module Freshdesk
+module Rottendesk
   class Ticket < Model
 
     endpoint "helpdesk/tickets"
