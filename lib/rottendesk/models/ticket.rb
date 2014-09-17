@@ -30,6 +30,10 @@ module Rottendesk
       def filter(filter_name)
         parse(app.client.get("#{get_endpoint}/filter/#{filter_name}", params: {format: :json}, append_json: false))
       end
+
+      def requester(requester_id)
+        parse(app.client.get("#{get_endpoint}/filter/requester/#{requester_id}", params: {format: :json}, append_json: false))
+      end
     end
   end
 end
