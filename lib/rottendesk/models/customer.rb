@@ -13,5 +13,6 @@ module Rottendesk
     field :sla_policy_id, freshdesk_name: 'sla-policy-id'
     field :cust_identifier, readonly: true, freshdesk_name: 'cust-identifier'
 
+    timestamps
   end
 end

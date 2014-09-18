@@ -26,6 +26,8 @@ module Rottendesk
     field :due_by
     field :attachments, readonly: true
 
+    timestamps
+
     class << self
       def filter(filter_name)
         default_filters("filter/#{filter_name}")
