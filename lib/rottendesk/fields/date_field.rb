@@ -9,7 +9,7 @@ module Rottendesk
     def to_json(hash)
       value = hash[freshdesk_name]
       value = value.iso8601 unless value.nil?
-      [name, value]
+      { name => value }
     end
   end
 end
