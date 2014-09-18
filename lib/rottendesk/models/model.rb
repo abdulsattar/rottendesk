@@ -119,7 +119,9 @@ module Rottendesk
 
       def field(name, options = {})
         @_fields ||= {}
-        field = @_fields[name] = Field.new(name, options)
+
+        type = Rottendesk.const_get((options[:type].to_s || '').capitalize + 'Field')
+        field = @_fields[name] = type.new(name, options)
         field.define_accessors(self)
       end
 

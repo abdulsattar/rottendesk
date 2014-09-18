@@ -22,6 +22,9 @@ module Rottendesk
     field :helpdesk_agent, readonly: true
     field :active, readonly: true
 
+    field :created_at, readonly: true, type: :date
+    field :updated_at, readonly: true, type: :date
+
     class << self
       def where(filters = {})
         filters[:query] = "phone is #{filters.delete(:phone)}" if filters[:phone]
