@@ -11,21 +11,6 @@ module Rottendesk
     end
 
     module ClassMethods
-      def field_accessor(field, options = {})
-        attr_reader field
-
-        define_dirty_methods(field)
-
-        if !options[:readonly]
-          class_eval %Q{
-            def #{field}=(value)
-              #{field}_changed! if @#{field} != value
-              @#{field} = value
-            end
-          }
-        end
-      end
-
       def define_dirty_methods(field)
         define_method "#{field}_changed!" do
           changed_fields[field] = __send__(field)

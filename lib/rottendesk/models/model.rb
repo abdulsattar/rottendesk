@@ -23,7 +23,17 @@ module Rottendesk
     end
 
     def to_h
-      fields.reduce({}){|h, f| h[f] = self.send(f); h}.compact
+      field_names.reduce({}){|h, f| h[f] = self.send(f); h}.compact
+    end
+
+    def to_json(*only_fields)
+      only_fields = fields if only_fields.empty?
+      hash = to_h
+      json = fields.reduce({}) do |result,f|
+        _, field = f
+        result.merge(field.to_json(hash))
+      end
+      {json_key => json}.to_json
     end
 
     def errors
@@ -37,8 +47,9 @@ module Rottendesk
     def from_json(json)
       json = JSON.parse(json) if json.is_a? String
       json = json[json_key] if json[json_key]
-      fields.each do |f|
-        self.instance_variable_set("@#{f}", json[f.to_s])
+      fields.each do |name, f|
+        name,value = f.from_json(json)
+        instance_variable_set("@#{name}", value)
       end
       self
     end
@@ -47,18 +58,21 @@ module Rottendesk
       self.class.fields
     end
 
+    def field_names
+      fields.keys
+    end
+
     protected
 
     def update
-      json = {json_key => to_h.only(*changed_fields.keys)}.to_json
+      json = to_json(*changed_fields.keys)
       client.put("#{endpoint}/#{id}", json)
     rescue RestClient::UnprocessableEntity => ex
       @errors = Hash[JSON.parse(ex.response)]
     end
 
     def create_new
-      json = {json_key => to_h}.to_json
-      response = client.post(endpoint, json)
+      response = client.post(endpoint, to_json)
       self.from_json response
     rescue RestClient::UnprocessableEntity => ex
       @errors = Hash[JSON.parse(ex.response)]
@@ -103,11 +117,10 @@ module Rottendesk
         end
       end
 
-      def field(field, options = {})
-        @_fields ||= []
-        @_fields << field
-
-        field_accessor field, options
+      def field(name, options = {})
+        @_fields ||= {}
+        field = @_fields[name] = Field.new(name, options)
+        field.define_accessors(self)
       end
 
       def fields

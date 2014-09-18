@@ -1,7 +1,11 @@
 require "rottendesk/version"
 
+require 'pry'
+
 require 'rottendesk/helpers/class'
 require 'rottendesk/helpers/hash'
+
+require 'rottendesk/fields/field'
 
 require 'rottendesk/models/dirty'
 require 'rottendesk/models/model'
