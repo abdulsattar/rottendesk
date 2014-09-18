@@ -16,7 +16,7 @@ module Rottendesk
     end
 
 
-    models = [User, Ticket]
+    models = [User, Ticket, Customer]
 
     models.each do |m|
       class_eval %Q<

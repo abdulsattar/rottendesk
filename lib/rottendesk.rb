@@ -11,6 +11,7 @@ require 'rottendesk/models/dirty'
 require 'rottendesk/models/model'
 require 'rottendesk/models/ticket'
 require 'rottendesk/models/user'
+require 'rottendesk/models/customer'
 
 require 'rottendesk/client'
 require 'rottendesk/app'
