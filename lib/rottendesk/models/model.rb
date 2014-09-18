@@ -125,6 +125,11 @@ module Rottendesk
         field.define_accessors(self)
       end
 
+      def timestamps
+        field :created_at, readonly: true, type: :date
+        field :updated_at, readonly: true, type: :date
+      end
+
       def fields
         @_fields
       end

@@ -22,6 +22,8 @@ module Rottendesk
     field :helpdesk_agent, readonly: true
     field :active, readonly: true
 
+    timestamps
+
     field :created_at, readonly: true, type: :date
     field :updated_at, readonly: true, type: :date
 
