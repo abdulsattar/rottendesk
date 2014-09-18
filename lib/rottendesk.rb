@@ -13,7 +13,14 @@ require 'rottendesk/app'
 
 module Rottendesk
   class << self
-    attr_accessor :logger
+    attr_reader :logger
+
+    def logger=(logger)
+      @logger = logger
+      @logger.formatter = proc do |severity, datetime, progname, msg|
+        "Rottendesk #{severity}: #{msg}"
+      end
+    end
   end
 end
 

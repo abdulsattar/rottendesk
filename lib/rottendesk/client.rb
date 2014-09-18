@@ -32,12 +32,12 @@ module Rottendesk
 
       url += '.json' if options[:append_json]
 
-      Rottendesk.logger.info "Rottendesk: #{options[:method].upcase} /#{url} with #{options.except(:method)}"
+      Rottendesk.logger.info "#{options[:method].upcase} /#{url} with #{options.except(:method)}"
 
       args = [options[:method], options[:body], options.except(:method, :body)].compact
       response = @rest_client[url].send(*args)
 
-      Rottendesk.logger.info "Rottendesk: #{response.code}"
+      Rottendesk.logger.info response.code
 
       response
 
