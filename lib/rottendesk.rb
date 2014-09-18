@@ -18,7 +18,7 @@ module Rottendesk
     def logger=(logger)
       @logger = logger
       @logger.formatter = proc do |severity, datetime, progname, msg|
-        "Rottendesk #{severity}: #{msg}"
+        "Rottendesk #{severity}: #{msg}\n"
       end
     end
   end
