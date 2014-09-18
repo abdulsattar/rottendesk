@@ -28,7 +28,7 @@ module Rottendesk
 
     def to_json(*only_fields)
       only_fields = fields if only_fields.empty?
-      hash = to_h
+      hash = to_h.only(*self.class.writable_fields)
       json = fields.reduce({}) do |result,f|
         _, field = f
         result.merge(field.to_json(hash))
@@ -125,6 +125,10 @@ module Rottendesk
 
       def fields
         @_fields
+      end
+
+      def writable_fields
+        fields.map{|name, f| name unless f.readonly?}.compact
       end
 
       def endpoint(endpoint)
