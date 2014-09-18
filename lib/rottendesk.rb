@@ -7,6 +7,7 @@ require 'rottendesk/helpers/hash'
 
 require 'rottendesk/fields/field'
 require 'rottendesk/fields/date_field'
+require 'rottendesk/fields/association_field'
 
 require 'rottendesk/models/dirty'
 require 'rottendesk/models/model'

@@ -17,15 +17,12 @@ module Rottendesk
     field :mobile
     field :language
     field :time_zone
-    field :customer_id
+    field :customer_id, type: :association
     field :deleted
     field :helpdesk_agent, readonly: true
     field :active, readonly: true
 
     timestamps
-
-    field :created_at, readonly: true, type: :date
-    field :updated_at, readonly: true, type: :date
 
     class << self
       def where(filters = {})
