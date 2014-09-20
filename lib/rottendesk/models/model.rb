@@ -107,6 +107,10 @@ module Rottendesk
         parse(app.client.get(@endpoint, params: filters))
       end
 
+      def all
+        where({})
+      end
+
       def parse(json)
         remote_fields = JSON.parse(json)
 
