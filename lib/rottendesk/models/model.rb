@@ -139,7 +139,7 @@ module Rottendesk
       end
 
       def writable_fields
-        fields.map{|name, f| name unless f.readonly?}.compact
+        fields.reject{|_, f| f.readonly?}.keys
       end
 
       def endpoint(endpoint)
