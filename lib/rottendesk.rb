@@ -1,7 +1,5 @@
 require "rottendesk/version"
 
-require 'pry'
-
 require 'rottendesk/helpers/class'
 require 'rottendesk/helpers/hash'
 
