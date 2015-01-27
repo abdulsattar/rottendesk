@@ -1,10 +1,11 @@
 # Rottendesk
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/abdulsattar/rottendesk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Code Climate](https://codeclimate.com/github/abdulsattar/rottendesk/badges/gpa.svg)](https://codeclimate.com/github/abdulsattar/rottendesk)
 
 Ruby client for [Freshdesk](https://freshdesk.com) that uses the [JSON API](http://freshdesk.com/api) of Freshdesk.
 
-[![Code Climate](https://codeclimate.com/github/abdulsattar/rottendesk/badges/gpa.svg)](https://codeclimate.com/github/abdulsattar/rottendesk)
+
 
 ## Installation
 
